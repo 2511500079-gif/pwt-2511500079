@@ -1,3 +1,4 @@
+<<<<<<< HEAD:starter.php
 
 
 
@@ -10,6 +11,13 @@ if(!isset($_SESSION['username'])){
 ?>
 
 
+=======
+<?php
+  session_start();
+  require_once("config/koneksi.php");
+  if(isset($_SESSION['Username'])){
+?>
+>>>>>>> 056736da04c71349e7de6849ba855c527813807b:index.php
 <!DOCTYPE html>
 <!--
 This is a starter template page. Use this page to start your new project from
@@ -161,11 +169,26 @@ scratch. This page gets rid of all links and provides the needed markup only.
               </li>
             </ul>
           </li>
+          <li class="nav-item menu-open">
+            <a href="#" class="nav-link active">
+              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <p>
+                Transaksi
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="#" class="nav-link active">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Jadwal</p>
+                </a>
+              </li>
           <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-th"></i>
               <p>
-                Simple Link
+                Logout
                 <span class="right badge badge-danger">New</span>
               </p>
             </a>
@@ -281,4 +304,11 @@ if ($page == "") {
 <script src="dist/js/adminlte.min.js"></script>
 </body>
 </html>
+<<<<<<< HEAD:starter.php
 <br><br>
+=======
+<?php
+  }else{
+    echo"<meta http-equiv='refresh'content='0 url =login.php'>";
+  }
+>>>>>>> 056736da04c71349e7de6849ba855c527813807b:index.php
