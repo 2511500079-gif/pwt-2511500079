@@ -1,5 +1,4 @@
 <?php
-<<<<<<< HEAD
 session_start();
 include "config/koneksi.php";
 

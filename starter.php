@@ -1,6 +1,3 @@
-<<<<<<< HEAD:starter.php
-
-
 
 <?php
 session_start();
@@ -10,14 +7,11 @@ if(!isset($_SESSION['username'])){
 }
 ?>
 
-
-=======
 <?php
   session_start();
   require_once("config/koneksi.php");
   if(isset($_SESSION['Username'])){
 ?>
->>>>>>> 056736da04c71349e7de6849ba855c527813807b:index.php
 <!DOCTYPE html>
 <!--
 This is a starter template page. Use this page to start your new project from
@@ -304,11 +298,10 @@ if ($page == "") {
 <script src="dist/js/adminlte.min.js"></script>
 </body>
 </html>
-<<<<<<< HEAD:starter.php
 <br><br>
 =======
 <?php
   }else{
     echo"<meta http-equiv='refresh'content='0 url =login.php'>";
   }
->>>>>>> 056736da04c71349e7de6849ba855c527813807b:index.php
+
