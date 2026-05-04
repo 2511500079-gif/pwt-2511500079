@@ -1,0 +1,120 @@
+<?php
+include __DIR__ . "/../config/koneksi.php";
+
+if (!isset($conn)) {
+    die("Koneksi tidak ditemukan!");
+}
+
+// AUTO KODE GURU
+$carikode = mysqli_query($conn, "SELECT MAX(kd_guru) as kode FROM guru");
+$data = mysqli_fetch_array($carikode);
+$kode = $data['kode'];
+
+if ($kode == NULL) {
+    $urutan = 1;
+} else {
+    $urutan = (int) substr($kode, 2) + 1;
+}
+
+$hasilkode = "G-" . str_pad($urutan, 3, "0", STR_PAD_LEFT);
+
+
+// PROSES SIMPAN
+if (isset($_POST['tambah'])) {
+
+    $kd_guru = $hasilkode;
+    $nm_guru = $_POST['nm_guru'] ?? '';
+    $jenkel = $_POST['jenkel'] ?? '';
+    $pend = $_POST['pend_terakhir'] ?? '';
+    $hp = $_POST['hp'] ?? '';
+    $alamat = $_POST['alamat'] ?? '';
+
+    if (empty($nm_guru) || empty($jenkel)) {
+        echo '<div class="alert alert-danger">Data tidak boleh kosong!</div>';
+    } else {
+
+        // INSERT USER DULU
+        $insertuser = mysqli_query($conn, "INSERT INTO users
+        (username, password, role) 
+        VALUES 
+        ('$kd_guru', '1234', 'guru')");
+
+        if (!$insertuser) {
+            die("Error user: " . mysqli_error($conn));
+        }
+
+        // AMBIL ID USER TERAKHIR
+        $id_user = mysqli_insert_id($conn);
+
+        // INSERT GURU
+        $insert = mysqli_query($conn, "INSERT INTO guru 
+        (kd_guru, id_user, nm_guru, jenkel, pend_terakhir, hp, alamat) 
+        VALUES 
+        ('$kd_guru','$id_user','$nm_guru','$jenkel','$pend','$hp','$alamat')");
+
+        if ($insert) {
+            echo '<div class="alert alert-success">Berhasil Disimpan</div>';
+            echo '<meta http-equiv="refresh" content="1;url=starter.php?page=guru">';
+        } else {
+            echo '<div class="alert alert-danger">Gagal Disimpan: ' . mysqli_error($conn) . '</div>';
+        }
+    }
+}
+?>
+
+<section class="content">
+<div class="container-fluid">
+<div class="card">
+<div class="card-body">
+
+<form method="POST">
+
+<div class="form-group">
+<label>Kode Guru</label>
+<input type="text" value="<?= $hasilkode ?>" class="form-control" readonly>
+</div>
+
+<div class="form-group">
+<label>ID User</label>
+<input type="number" name="id_user" class="form-control">
+</div>
+
+<div class="form-group">
+<label>Nama Guru</label>
+<input type="text" name="nm_guru" class="form-control">
+</div>
+
+<div class="form-group">
+<label>Jenis Kelamin</label>
+<select name="jenkel" class="form-control">
+    <option value="">-- Pilih --</option>
+    <option value="L">Laki-laki</option>
+    <option value="P">Perempuan</option>
+</select>
+</div>
+
+<div class="form-group">
+<label>Pendidikan Terakhir</label>
+<input type="text" name="pend_terakhir" class="form-control">
+</div>
+
+<div class="form-group">
+<label>HP</label>
+<input type="text" name="hp" class="form-control">
+</div>
+
+<div class="form-group">
+<label>Alamat</label>
+<textarea name="alamat" class="form-control"></textarea>
+</div>
+
+<br>
+<button type="submit" name="tambah" class="btn btn-primary">Simpan</button>
+
+</form>
+
+</div>
+</div>
+</div>
+</div>
+</section>

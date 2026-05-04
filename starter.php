@@ -1,3 +1,15 @@
+
+
+
+<?php
+session_start();
+
+if(!isset($_SESSION['username'])){
+    header("location:login.php");
+}
+?>
+
+
 <!DOCTYPE html>
 <!--
 This is a starter template page. Use this page to start your new project from
@@ -7,7 +19,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>AdminLTE 3 | Starter</title>
+  <title>monic | Starter</title>
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -58,6 +70,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         </div>
       </li>
 
+      
     </ul>
   </nav>
   <!-- /.navbar -->
@@ -67,7 +80,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- Brand Logo -->
     <a href="index3.html" class="brand-link">
       <img src="dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-      <span class="brand-text font-weight-light">AdminLTE 3</span>
+      <span class="brand-text font-weight-light">web saya</span>
     </a>
 
     <!-- Sidebar -->
@@ -75,10 +88,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+          <img src="WhatsApp Image 2026-04-01 at 23.56.02.jpeg" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">Alexander Pierce</a>
+          <a href="#" class="d-block">monic</a>
         </div>
       </div>
 
@@ -103,21 +116,47 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <a href="#" class="nav-link active">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
-                Master 
+                Starter Pages
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
             <ul class="nav nav-treeview">
+
               <li class="nav-item">
-                <a href="#" class="nav-link active">
+                <a href="starter.php?page=mapel" class="nav-link active">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Mata Pelajaran</p>
+                  <p>Mapel</p>
                 </a>
               </li>
+
+              <li class="nav-item">
+                <a href="starter.php?page=guru" class="nav-link active">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>guru</p>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a href="starter.php?page=kelas" class="nav-link active">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>kelas</p>
+                </a>
+              </li>
+
+                            <li class="nav-item">
+                <a href="starter.php?page=siswa" class="nav-link active">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>siswa</p>
+                </a>
+              </li>
+
+
+
+
               <li class="nav-item">
                 <a href="#" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Siswa</p>
+                  <p>Inactive Page</p>
                 </a>
               </li>
             </ul>
@@ -131,6 +170,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
               </p>
             </a>
           </li>
+          <li class="nav-item">
+<a href="logout.php" class="nav-link">
+<i class="nav-icon fas fa-sign-out-alt"></i>
+<p>Logout</p>
+</a>
+</li>
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
@@ -165,19 +210,37 @@ scratch. This page gets rid of all links and provides the needed markup only.
           <div class="col-lg-12">
             <div class="card">
               <div class="card-body">
-                <h5 class="card-title">Dashboard</h5>
+                <h5 class="card-title">dashboard  </h5>
 
                 <p class="card-text">
-                  Selamat Datang di Sistem Jadwal Siswa pada SMA/SMK XYZ
-                </p>
+                  <?php
+if (isset($_GET['page'])) {
+    $page = $_GET['page'];
+} else {
+    $page = "";
+}
 
+if ($page == "") {
+    include "page/dashboard.php";
+} elseif (!file_exists("page/$page.php")) {
+    echo "File Tidak Ditemukan";
+} else {
+    include "page/$page.php";
+}
+?>
+</p>
+
+
+
+                <a href="starter.php?page=dashboard" class="card-link">kembali</a>
+                
               </div>
             </div>
 
             
-          </div>
-          <!-- /.col-md-6 -->
           
+          
+          <!-- /.col-md-6 -->
         </div>
         <!-- /.row -->
       </div><!-- /.container-fluid -->
@@ -218,3 +281,4 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <script src="dist/js/adminlte.min.js"></script>
 </body>
 </html>
+<br><br>
