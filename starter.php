@@ -79,6 +79,12 @@ if (!isset($_SESSION['username'])) {
           </li>
 
           <li class="nav-item">
+            <a href="starter.php?page=siswa" class="nav-link">
+              <p>Skripsi</p>
+            </a>
+          </li>
+
+          <li class="nav-item">
             <a href="logout.php" class="nav-link text-danger">
               <p>Logout</p>
             </a>
